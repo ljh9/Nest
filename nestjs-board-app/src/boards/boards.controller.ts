@@ -7,6 +7,7 @@ import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardSatusValidationPipe } from './pipes/board-status-validation.pipe';
 
 @Controller('boards')
+@UseGuards(AuthGuard())
 export class BoardsController {
     constructor(private boardsService: BoardsService){}
 
