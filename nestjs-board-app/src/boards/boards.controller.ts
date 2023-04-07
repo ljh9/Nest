@@ -5,6 +5,8 @@ import { Board } from './board.entity';
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { BoardSatusValidationPipe } from './pipes/board-status-validation.pipe';
+import { GetUser } from 'src/auth/get-user.decorator';
+import { User } from 'src/auth/user.entity';
 
 @Controller('boards')
 @UseGuards(AuthGuard())
@@ -31,7 +33,8 @@ export class BoardsController {
 
     @Post()
     @UsePipes(ValidationPipe)
-    createBoard(@Body() CreateBoardDto: CreateBoardDto): Promise<Board> {
+    createBoard(@Body() CreateBoardDto: CreateBoardDto, 
+    @GetUser() user:User): Promise<Board> {
         return this.boardsService.createBoard(CreateBoardDto);
     }
 
